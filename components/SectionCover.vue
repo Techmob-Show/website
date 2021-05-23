@@ -5,12 +5,22 @@
       <a href="https://open.spotify.com/show/4t9bjIBUB0YRipDQjORNZQ">
         <img src="/img/spotify.svg" alt="Techmob Show on Spotify" />
       </a>
-      <a href="https://podcasts.apple.com/de/podcast/techmob-show/id1561550306?l=en">
+      <a
+        href="https://podcasts.apple.com/de/podcast/techmob-show/id1561550306?l=en"
+      >
         <img src="/img/itunes.svg" alt="Techmob Show on iTunes" />
       </a>
-      <a href="https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy81MzYwZTExMC9wb2RjYXN0L3Jzcw">
-        <img src="/img/google_podcast.svg" alt="Techmob Show on Google Podcast" />
+      <a
+        href="https://podcasts.google.com/feed/aHR0cHM6Ly9hbmNob3IuZm0vcy81MzYwZTExMC9wb2RjYXN0L3Jzcw"
+      >
+        <img
+          src="/img/google_podcast.svg"
+          alt="Techmob Show on Google Podcast"
+        />
       </a>
+    </div>
+    <div class="more">
+      <a href="https://anchor.fm/techmobshow">Und viele mehr...</a>
     </div>
   </section>
 </template>
@@ -63,6 +73,23 @@ export default {
     }
     &:hover {
       transform: scale(1.1);
+    }
+  }
+}
+.more {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: flex-start;
+  a {
+    text-decoration: none;
+    color: var(--color-dark);
+    border-bottom: 1px solid transparent;
+    transition: var(--transition);
+    &:hover {
+      border-color: var(--color-dark);
     }
   }
 }

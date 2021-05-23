@@ -58,19 +58,10 @@
 </template>
 
 <script>
-import { createClient } from '@supabase/supabase-js'
-// TODO get from env
-const supabase = createClient(
-  '',
-  '')
+import { mapState, mapActions } from 'vuex'
+
 export default {
   name: 'SectionFeedback',
-  props: {
-    episodes: {
-      type: Array,
-      required: true
-    }
-  },
   data() {
     return {
       captcha: '',
@@ -78,23 +69,23 @@ export default {
       captchaOptions: [
         {
           lastname: 'Stoll',
-          firstname: 'Henry'
+          firstname: 'Henry',
         },
         {
           lastname: 'Möller',
-          firstname: 'Jakob'
+          firstname: 'Jakob',
         },
         {
           lastname: 'Harambasic',
-          firstname: 'Luka'
-        }
+          firstname: 'Luka',
+        },
       ],
       message: '',
       feedback: {
         message: '',
         email: '',
-        episodeId: 0
-      }
+        episodeId: 0,
+      },
     }
   },
   computed: {
@@ -105,30 +96,26 @@ export default {
         this.test.firstname.toLocaleLowerCase() !==
         this.captcha.toLocaleLowerCase()
       )
-    }
+    },
+    ...mapState({
+      episodes: (state) => state.episodes,
+    }),
   },
   created() {
     const randomNumber = Math.floor(Math.random() * 3)
     this.test = this.captchaOptions[randomNumber]
   },
   methods: {
+    ...mapActions({
+      sendFeedback: 'sendFeedback',
+    }),
     async onFeedback() {
-      const { error } = await supabase.from('feedback').insert(
-        [
-          {
-            message: this.feedback.message,
-            episode_id:
-              this.feedback.episodeId === 0 ? null : this.feedback.episodeId,
-            email: this.feedback.email
-          }
-        ],
-        { returning: 'minimal' }
-      )
-      this.message = error
-        ? 'Leider ist etwas schief gelaufen, versuche bis bitte gleich nochmal'
-        : 'Dankeschön! :)'
-    }
-  }
+      const isSuccess = await this.sendFeedback(this.feedback)
+      this.message = isSuccess
+        ? 'Dankeschön! :)'
+        : 'Leider ist etwas schief gelaufen, versuche bis bitte gleich nochmal'
+    },
+  },
 }
 </script>
 

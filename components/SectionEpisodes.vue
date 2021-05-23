@@ -2,7 +2,7 @@
   <section v-if="episodes" class="white">
     <h2>Alle Folgen</h2>
     <ul>
-      <li v-for="episode in sortedEpisodes" :key="episode.id" class="episode">
+      <li v-for="episode in episodes" :key="episode.id" class="episode">
         <div class="season-episode">
           S{{ episode.season }} / E{{ episode.episode_in_season }}
         </div>
@@ -16,24 +16,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'SectionEpisodes',
-  props: {
-    episodes: {
-      type: Array,
-      required: true,
-    },
-  },
-  computed: {
-    sortedEpisodes() {
-      const episodesCopy = JSON.parse(JSON.stringify(this.episodes))
-      return episodesCopy.sort((a, b) => {
-        const diffSeason = a.season - b.season
-        if (diffSeason) return diffSeason
-        return a.episode_in_season - b.episode_in_season
-      })
-    },
-  },
+  computed: mapState({
+    episodes: (state) => state.episodes,
+  }),
 }
 </script>
 
