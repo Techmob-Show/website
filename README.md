@@ -1,5 +1,7 @@
 # techmobshow
 
+Simple podcast website which consume supabase to display the latest episodes which also allows storing feedback per episode.
+
 ## Build Setup
 
 ```bash
