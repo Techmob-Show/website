@@ -1,19 +1,13 @@
 <template>
   <section class="checklist white">
-    <h2>✅ Techmob Show Checklist</h2>
+    <h2>✅ Techmob Show Podcasting Checklist</h2>
     <p>
-      Bitte vor jeder Aufnahme alle Punkte abhaken! Ihr wisst warum... 😅
+      Check off every point before starting to record each episode! You know
+      why... 😅
     </p>
     <ul>
-      <li>
-        <input class="checkbox" type="checkbox" />Input Microphone in Audacity
-        checken
-      </li>
-      <li>
-        <input class="checkbox" type="checkbox" />Probeaufnahme machen & anhören
-      </li>
-      <li>
-        <input class="checkbox" type="checkbox" />Pegel überprüfen & einstellen
+      <li v-for="item in checklistItems" :key="item">
+        <input class="checkbox" type="checkbox" />{{ item }}
       </li>
     </ul>
   </section>
@@ -21,7 +15,17 @@
 
 <script>
 export default {
-  name: 'Checklist'
+  name: 'Checklist',
+  data() {
+    return {
+      checklistItems: [
+        'Check microphone input level in your audiotool (Audacity) 🎛️',
+        'Start a test recording and listen to it 🔴🎙',
+        'Check input level and adjust 🎚️',
+        'Close all windows and doors 🪟',
+      ],
+    }
+  },
 }
 </script>
 
